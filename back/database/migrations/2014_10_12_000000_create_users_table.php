@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('is_admin');
             $table->integer('word_count')->default(0);
             $table->timestamps();
         });

@@ -11,11 +11,11 @@ class User extends Authenticatable
 
     protected $fillable = [
         'email',
-        'password',
         'word_count'
     ];
 
     protected $hidden = [
         'password',
+        'is_admin'
     ];
 }

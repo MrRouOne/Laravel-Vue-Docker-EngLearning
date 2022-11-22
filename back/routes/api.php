@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/gg', function (Request $request) {
+    return "GG";
+});
+
+Route::post('/register',[UserController::class, 'register']);
+Route::get('/register2',[UserController::class, 'register2']);
 
 
