@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+
+  back:
+    container_name: ${PROJECT_NAME:-project}-back
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+
+  client:
+    container_name: ${PROJECT_NAME:-project}-client
+    restart: always
+    tty: true
+
+  web-service:
+    container_name: ${PROJECT_NAME:-project}-web-service
+
+  database:
+    image: postgres
+    container_name: ${PROJECT_NAME:-project}-database
+    tty: true
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${BACK_DATABASE:-back}
+      POSTGRES_USER: ${DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+
+  adminer:
+    image: adminer
+    container_name: ${PROJECT_NAME:-project}-adminer
+    restart: always
+
+

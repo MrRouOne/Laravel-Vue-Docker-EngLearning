@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+
+  back:
+    build: ../back
+    volumes:
+      - ../back/:/var/www
+
+  client:
+    build: ../client
+    ports:
+      - "${CLIENT_SERVICE_PORT:-80}:8080"
+
+  web-service:
+    build: deploy/nginx
+    ports:
+      - "${WEB_SERVICE_PORT:-81}:80"
+    volumes:
+      - ../back/:/var/www
+
+  database:
+    ports:
+      - "${DATABASE_PORT:-5432}:5432"
+
+  adminer:
+    ports:
+      - "${ADMINER_PORT:-63}:8080"
+
+
