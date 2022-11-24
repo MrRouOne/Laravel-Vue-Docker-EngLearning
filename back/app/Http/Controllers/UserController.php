@@ -2,27 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\HelperValidator;
-use App\Helpers\HelperOutputData;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use App\Http\Requests\User\RegisterRequest;
+use App\Http\Resources\UserRegisterResource;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $validator = new HelperValidator();
-        $validator->validate($request->all(), [
-            'email' => 'required',
-            'password' => 'required',
+        $user = User::create([
+            'id' => Str::uuid(),
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
         ]);
 
-        return HelperOutputData::globalOutput("Good!", $validator->errors, $validator->code ?? 200);
-    }
-
-    public function register2(Request $request)
-    {
-        return $request;
+        return new UserRegisterResource($user);
     }
 }

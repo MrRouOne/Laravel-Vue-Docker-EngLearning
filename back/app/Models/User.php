@@ -9,8 +9,12 @@ class User extends Authenticatable
 {
     use HasFactory;
 
+    protected $keyType = 'string';
+
     protected $fillable = [
+        'id',
         'email',
+        'password',
         'word_count'
     ];
 
