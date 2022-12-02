@@ -19,7 +19,10 @@ Route::get('/gg', function (Request $request) {
     return "GG";
 });
 
-Route::post('/register',[UserController::class, 'register']);
-Route::get('/register2',[UserController::class, 'register2']);
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+Route::middleware('auth:api')->group(function () {
+    Route::post('/logout', [UserController::class, 'logout']);
+});
 
 

@@ -2,17 +2,17 @@
 
 namespace App\Http\Requests\User;
 
+use App\Exceptions\BaseException;
 use App\Http\Requests\BaseRequest;
 
-class RegisterRequest extends BaseRequest
+class LoginRequest extends BaseRequest
 {
 
     public function rules()
     {
         return [
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8', 'max:32', 'regex:/^(?=.*\d)(?=.*[a-z])[0-9a-z]+$/i'],
-            'password_confirmation' => ['required', 'same:password'],
+            'email' => ['required'],
+            'password' => ['required'],
         ];
     }
 
